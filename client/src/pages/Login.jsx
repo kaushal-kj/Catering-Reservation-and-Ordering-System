@@ -82,8 +82,10 @@ const Login = () => {
         </p>
         {loading ? (
           <>
-            <LoaderCircle className="animate-spin size-5" />
-            <span className="ml-1.5"> Please wait</span>
+            <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded transition cursor-pointer">
+              <LoaderCircle className="animate-spin size-5" />
+              <span className="ml-1.5"> Please wait</span>
+            </button>
           </>
         ) : (
           <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded transition cursor-pointer">
