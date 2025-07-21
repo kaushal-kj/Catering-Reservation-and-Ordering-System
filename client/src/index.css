@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
