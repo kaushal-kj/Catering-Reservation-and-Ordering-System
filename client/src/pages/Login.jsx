@@ -5,6 +5,7 @@ import API from "../services/api";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import logo from "../assets/logo.png";
+import { LoaderCircle } from "lucide-react";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,12 +14,14 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const res = await API.post("/user/login", form);
@@ -29,6 +32,8 @@ const Login = () => {
       toast.error(
         err.response?.data?.message || "Login failed. Please try again."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,9 +80,16 @@ const Login = () => {
             Forgot Password?
           </Link>
         </p>
-        <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded transition cursor-pointer">
-          Login
-        </button>
+        {loading ? (
+          <>
+            <LoaderCircle className="animate-spin size-5" />
+            <span className="ml-1.5"> Please wait</span>
+          </>
+        ) : (
+          <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded transition cursor-pointer">
+            Login
+          </button>
+        )}
         <div className="text-center mt-4">
           <span className="text-gray-600 text-sm">
             New user?{" "}
