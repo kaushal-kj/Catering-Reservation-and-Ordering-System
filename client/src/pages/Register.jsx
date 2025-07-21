@@ -14,7 +14,7 @@ const Register = () => {
     email: "",
     password: "",
   });
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -23,6 +23,7 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const res = await API.post("/user/register", form);
@@ -34,6 +35,8 @@ const Register = () => {
         error.response?.data?.message ||
           "Registration failed. Please try again."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,9 +84,17 @@ const Register = () => {
           value={form.password}
           required
         />
-        <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded transition cursor-pointer">
-          Register
-        </button>
+        {loading ? (
+          <button className="w-full flex justify-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded transition cursor-pointer">
+            <LoaderCircle className="animate-spin size-5" />
+            <span className="ml-1.5"> Please wait</span>
+          </button>
+        ) : (
+          <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded transition cursor-pointer">
+            Register
+          </button>
+        )}
+
         <div className="text-center mt-4">
           <span className="text-gray-600 text-sm">
             Already have an account?{" "}
