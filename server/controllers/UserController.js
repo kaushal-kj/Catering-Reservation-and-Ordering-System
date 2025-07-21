@@ -2,7 +2,7 @@ import User from "../models/UserModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import sendEmail from "../utils/sendEmail.js";
+import sendEmail from "../utils/SendEmail.js";
 import { generateResetPasswordEmail } from "../utils/emailTemplates.js";
 
 export const register = async (req, res) => {
